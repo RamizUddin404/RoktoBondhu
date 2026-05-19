@@ -18,7 +18,7 @@ const DISTRICT_DATA = {
     "Dinajpur": ["Dinajpur City", "Birampur", "Birganj", "Birol", "Bochaganj", "Chirirbandar", "Phulbari", "Ghoraghat", "Hakimpur", "Kaharole", "Khansama", "Nawabganj", "Parbatipur"]
 };
 
-// Initial donor data (you can add donors manually here)
+// Initial donor data
 let donorData = [
     {
         name: "Admin Demo",
@@ -30,16 +30,28 @@ let donorData = [
     }
 ];
 
-// Helper to save data to local storage for persistence on this device
+// Helper to save data
 function saveToLocal() {
-    localStorage.setItem('rokto_donors', JSON.stringify(donorData));
-}
-
-function loadFromLocal() {
-    const saved = localStorage.getItem('rokto_donors');
-    if (saved) {
-        donorData = JSON.parse(saved);
+    try {
+        localStorage.setItem('rokto_donors', JSON.stringify(donorData));
+    } catch (e) {
+        console.error("Save failed", e);
     }
 }
 
+function loadFromLocal() {
+    try {
+        const saved = localStorage.getItem('rokto_donors');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed)) {
+                donorData = parsed;
+            }
+        }
+    } catch (e) {
+        console.error("Load failed", e);
+    }
+}
+
+// Immediately load
 loadFromLocal();
