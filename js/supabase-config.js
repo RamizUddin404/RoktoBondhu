@@ -1,6 +1,6 @@
 // Replace with your Supabase project configuration
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const SUPABASE_URL = "https://mpyluhqmiiddyllobezk.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_O_AibId9RuWsqSEBn2PLPg_jRX9VmsW";
 
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
