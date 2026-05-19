@@ -69,12 +69,8 @@ function showMessage(msg, duration = 3000) {
 // Registration Logic
 const regForm = document.getElementById('regForm');
 if (regForm) {
-    regForm.onsubmit = async (e) => {
+    regForm.onsubmit = (e) => {
         e.preventDefault();
-        if (!supabaseClient) {
-            showMessage("Database initialization failed. Please refresh.");
-            return;
-        }
 
         const name = document.getElementById('regName').value;
         const blood = document.getElementById('regBlood').value;
@@ -83,75 +79,59 @@ if (regForm) {
         const phone = document.getElementById('regPhone').value;
         const lastDate = document.getElementById('regDate').value;
 
-        try {
-            const { error } = await supabaseClient
-                .from('donors')
-                .insert([{ name, blood_group: blood, district, thana, phone, last_donation: lastDate }]);
+        const newDonor = { name, blood_group: blood, district, thana, phone, last_donation: lastDate };
+        donorData.push(newDonor);
+        saveToLocal();
 
-            if (error) throw error;
-
-            showMessage("রেজিস্ট্রেশন সফল হয়েছে!");
-            e.target.reset();
-            showTab('home');
-        } catch (err) {
-            showMessage("ভুল হয়েছে: " + err.message);
-        }
+        showMessage("রেজিস্ট্রেশন সফল হয়েছে!");
+        e.target.reset();
+        showTab('home');
     };
 }
 
 // Search Logic
 const searchBtn = document.getElementById('searchBtn');
 if (searchBtn) {
-    searchBtn.onclick = async () => {
-        if (!supabaseClient) {
-            showMessage("Database initialization failed. Please refresh.");
-            return;
-        }
-
+    searchBtn.onclick = () => {
         const blood = document.getElementById('searchBlood').value;
         const district = document.getElementById('searchDistrict').value;
         const thana = document.getElementById('searchThana').value;
         const resultsDiv = document.getElementById('searchResults');
         resultsDiv.innerHTML = '<div class="text-center py-10"><i class="fas fa-spinner fa-spin text-3xl text-red-500"></i></div>';
 
-        try {
-            let query = supabaseClient.from('donors').select('*');
-            if (blood) query = query.eq('blood_group', blood);
-            if (district) query = query.eq('district', district);
-            if (thana) query = query.eq('thana', thana);
-
-            const { data: donors, error } = await query;
-            if (error) throw error;
-
+        setTimeout(() => {
             resultsDiv.innerHTML = '';
-            if (!donors || donors.length === 0) {
+            
+            const filtered = donorData.filter(d => {
+                return (!blood || d.blood_group === blood) && 
+                       (!district || d.district === district) && 
+                       (!thana || d.thana === thana);
+            });
+
+            if (filtered.length === 0) {
                 resultsDiv.innerHTML = '<p class="text-center py-10 text-gray-500">কোনো ডোনার পাওয়া যায়নি।</p>';
                 return;
             }
 
-            donors.forEach(donor => {
+            filtered.forEach(donor => {
                 const card = `
-                    <div class="bg-white p-6 rounded-2xl shadow-md flex justify-between items-center border-l-8 border-red-500">
+                    <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 flex justify-between items-center border-l-4 border-l-red-500">
                         <div>
-                            <h4 class="text-xl font-bold text-gray-800">${donor.name} (${donor.blood_group})</h4>
-                            <p class="text-gray-500 text-sm"><i class="fas fa-map-marker-alt mr-1"></i> ${donor.district}, ${donor.thana}</p>
-                            ${donor.last_donation ? `<p class="text-xs text-gray-400 mt-1">শেষ রক্তদান: ${donor.last_donation}</p>` : ''}
+                            <h4 class="text-xl font-bold text-white">${donor.name} (${donor.blood_group})</h4>
+                            <p class="text-gray-400 text-sm"><i class="fas fa-map-marker-alt mr-1"></i> ${donor.district}, ${donor.thana}</p>
                         </div>
-                        <a href="tel:${donor.phone}" class="bg-green-500 text-white p-4 rounded-full hover:bg-green-600 transition shadow-lg">
+                        <a href="tel:${donor.phone}" class="bg-green-600 text-white p-4 rounded-full hover:bg-green-700 transition">
                             <i class="fas fa-phone"></i>
                         </a>
                     </div>
                 `;
                 resultsDiv.insertAdjacentHTML('beforeend', card);
             });
-        } catch (err) {
-            showMessage("সার্চে ভুল হয়েছে: " + err.message);
-        }
+        }, 300);
     };
 }
 
-// Initialize on window load
+// Initialize
 window.addEventListener('load', () => {
-    initSupabase();
     populateDropdowns();
 });

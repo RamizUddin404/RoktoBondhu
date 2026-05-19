@@ -1,21 +1,3 @@
-// Supabase project configuration
-const SUPABASE_URL = "https://mpyluhqmiiddyllobezk.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1weWx1aHFtaWlkZHlsbG9iZXprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxNTA3MTYsImV4cCI6MjA5NDcyNjcxNn0.R3eMsN1WJxYZidsbETHqGwB-LPjkKNxPf0ci6WbvAXI";
-
-// Use a global variable for the client
-let supabaseClient;
-
-// Initialize Supabase when the library is ready
-function initSupabase() {
-    if (typeof supabase !== 'undefined') {
-        supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        console.log("Supabase initialized successfully");
-        return true;
-    }
-    console.error("Supabase library not loaded yet");
-    return false;
-}
-
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
 const DISTRICT_DATA = {
@@ -35,3 +17,29 @@ const DISTRICT_DATA = {
     "Rangpur": ["Rangpur City", "Badarganj", "Gangachara", "Kaunia", "Mithapukur", "Pirgachha", "Pirganj", "Taraganj"],
     "Dinajpur": ["Dinajpur City", "Birampur", "Birganj", "Birol", "Bochaganj", "Chirirbandar", "Phulbari", "Ghoraghat", "Hakimpur", "Kaharole", "Khansama", "Nawabganj", "Parbatipur"]
 };
+
+// Initial donor data (you can add donors manually here)
+let donorData = [
+    {
+        name: "Admin Demo",
+        blood_group: "O+",
+        district: "Dhaka",
+        thana: "Dhaka City",
+        phone: "01700000000",
+        last_donation: "2024-01-01"
+    }
+];
+
+// Helper to save data to local storage for persistence on this device
+function saveToLocal() {
+    localStorage.setItem('rokto_donors', JSON.stringify(donorData));
+}
+
+function loadFromLocal() {
+    const saved = localStorage.getItem('rokto_donors');
+    if (saved) {
+        donorData = JSON.parse(saved);
+    }
+}
+
+loadFromLocal();

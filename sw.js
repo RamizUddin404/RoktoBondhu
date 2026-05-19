@@ -1,14 +1,13 @@
-const CACHE_NAME = 'roktobondhu-supabase-v1';
+const CACHE_NAME = 'roktobondhu-v2';
 const ASSETS = [
   './',
   './index.html',
   './admin.html',
-  './js/supabase-config.js',
+  './js/data-store.js',
   './js/app.js',
   './js/admin.js',
   'https://cdn.tailwindcss.com',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
-  'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
 ];
 
 self.addEventListener('install', e => {

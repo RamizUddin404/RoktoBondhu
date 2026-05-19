@@ -3,84 +3,61 @@ const adminDashboard = document.getElementById('adminDashboard');
 const adminList = document.getElementById('adminList');
 const stats = document.getElementById('stats');
 
-// Login
+let isAdmin = false;
+
+// Login (Static Demo for GitHub Pages)
 const loginBtn = document.getElementById('loginBtn');
 if (loginBtn) {
-    loginBtn.onclick = async () => {
-        if (!supabaseClient) {
-            initSupabase();
-        }
+    loginBtn.onclick = () => {
         const email = document.getElementById('email').value;
         const password = document.getElementById('pass').value;
-        const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-        if (error) alert("Login failed: " + error.message);
+        
+        if (email === "admin@rokto.com" && password === "123456") {
+            isAdmin = true;
+            loginSection.classList.add('hidden');
+            adminDashboard.classList.remove('hidden');
+            loadDonors();
+        } else {
+            alert("Login failed! Default: admin@rokto.com / 123456");
+        }
     };
 }
 
 // Logout
-async function logout() {
-    await supabaseClient.auth.signOut();
+function logout() {
+    isAdmin = false;
+    loginSection.classList.remove('hidden');
+    adminDashboard.classList.add('hidden');
 }
 
 // Load Data
-async function loadDonors() {
-    const { data: donors, error } = await supabaseClient
-        .from('donors')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-    if (error) {
-        alert("Error loading donors: " + error.message);
-        return;
-    }
-
+function loadDonors() {
     adminList.innerHTML = '';
-    if (stats) stats.innerText = `Total Donors: ${donors ? donors.length : 0}`;
+    if (stats) stats.innerText = `Total Donors: ${donorData.length}`;
     
-    if (donors) {
-        donors.forEach(d => {
-            const row = `
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="p-6 font-semibold text-gray-800">${d.name}</td>
-                    <td class="p-6"><span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-bold">${d.blood_group}</span></td>
-                    <td class="p-6 text-gray-500">${d.district}</td>
-                    <td class="p-6 font-mono">${d.phone}</td>
-                    <td class="p-6 text-center">
-                        <button onclick="deleteDonor('${d.id}')" class="text-gray-400 hover:text-red-500 transition">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-            adminList.insertAdjacentHTML('beforeend', row);
-        });
-    }
+    donorData.forEach((d, index) => {
+        const row = `
+            <tr class="hover:bg-gray-800 transition border-b border-gray-700">
+                <td class="p-6 font-semibold text-gray-200">${d.name}</td>
+                <td class="p-6"><span class="bg-red-900/30 text-red-500 px-3 py-1 rounded-full text-xs font-bold border border-red-500/20">${d.blood_group}</span></td>
+                <td class="p-6 text-gray-400">${d.district}, ${d.thana}</td>
+                <td class="p-6 font-mono text-gray-300">${d.phone}</td>
+                <td class="p-6 text-center">
+                    <button onclick="deleteDonor(${index})" class="text-gray-500 hover:text-red-500 transition">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+        adminList.insertAdjacentHTML('beforeend', row);
+    });
 }
 
 // Delete Donor
-async function deleteDonor(id) {
-    if (confirm("Are you sure you want to delete this donor?")) {
-        const { error } = await supabaseClient.from('donors').delete().eq('id', id);
-        if (error) alert("Delete failed: " + error.message);
-        else loadDonors();
+function deleteDonor(index) {
+    if (confirm("Are you sure?")) {
+        donorData.splice(index, 1);
+        saveToLocal();
+        loadDonors();
     }
 }
-
-// Initialize on load
-window.addEventListener('load', () => {
-    initSupabase();
-    
-    // Auth Listener
-    if (supabaseClient) {
-        supabaseClient.auth.onAuthStateChange((event, session) => {
-            if (session) {
-                if (loginSection) loginSection.classList.add('hidden');
-                if (adminDashboard) adminDashboard.classList.remove('hidden');
-                loadDonors();
-            } else {
-                if (loginSection) loginSection.classList.remove('hidden');
-                if (adminDashboard) adminDashboard.classList.add('hidden');
-            }
-        });
-    }
-});

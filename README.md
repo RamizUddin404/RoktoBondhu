@@ -1,32 +1,19 @@
-# RoktoBondhu (রক্তবন্ধু) - Supabase Web App
+# RoktoBondhu (রক্তবন্ধু) - GitHub Edition
 
-A high-performance, responsive, and offline-capable blood donation web application powered by **Supabase**.
+A modern, responsive, and dark-themed blood donation web application.
 
 ## Features
-- **Modern UI:** Built with Tailwind CSS for a premium look.
-- **Supabase Backend:** Real-time data and secure authentication.
-- **PWA Ready:** Install as an app and works offline.
-- **Admin Panel:** Manage donor entries easily.
-- **One-Click Call:** Directly call donors from the results.
+- **Full Dark Mode:** Modern and clean UI.
+- **GitHub Hosted:** Runs entirely on GitHub Pages.
+- **No Database Needed:** Uses local storage for persistence on your device.
+- **PWA Ready:** Install on mobile and works offline.
+- **Admin Panel:** Simple password-protected dashboard.
 
-## Setup Instructions
+## How it works
+- This version removes all external dependencies like Supabase/Firebase.
+- Donor data is managed within `js/data-store.js`.
+- For a multi-user shared database, you can manually update the `donorData` array in `js/data-store.js` and push to GitHub.
 
-### 1. Supabase Setup
-- Create a project on [Supabase](https://supabase.com/).
-- **Database:** Create a table named `donors` with these columns:
-  - `id`: uuid (primary key, default: gen_random_uuid())
-  - `name`: text
-  - `blood_group`: text
-  - `district`: text
-  - `phone`: text
-  - `last_donation`: text (optional)
-  - `created_at`: timestamptz (default: now())
-- **Authentication:** Enable Email/Password provider. Create an admin user.
-- **API Settings:** Copy your `Project URL` and `anon key` to `js/supabase-config.js`.
-
-### 2. Deployment
-- Push this code to a new GitHub repository.
-- Enable **GitHub Pages** in Settings -> Pages.
-
-## Deployment Reset
-This project has been re-initialized to support a web-first architecture.
+## Admin Login
+- **Email:** admin@rokto.com
+- **Password:** 123456
