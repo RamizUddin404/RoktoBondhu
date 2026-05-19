@@ -3,48 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - RoktoBondhu</title>
+    <title>Admin - RoktoBondhu</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-gray-100 min-h-screen p-4">
+<body class="bg-gray-900 text-gray-100 min-h-screen p-4 font-sans">
 
-    <div id="loginSection" class="max-w-md mx-auto mt-20 bg-white p-8 rounded-3xl shadow-xl">
-        <h2 class="text-3xl font-bold mb-6 text-center text-red-500">Admin Login</h2>
-        <div class="space-y-4">
-            <input type="email" id="email" placeholder="Email" class="w-full p-4 bg-gray-50 border rounded-2xl focus:ring-2 focus:ring-red-500 transition">
-            <input type="password" id="pass" placeholder="Password" class="w-full p-4 bg-gray-50 border rounded-2xl focus:ring-2 focus:ring-red-500 transition">
-            <button id="loginBtn" class="w-full bg-red-500 text-white p-4 rounded-2xl font-bold hover:bg-red-600 transition shadow-lg">Login</button>
+    <div id="loginSection" class="max-w-md mx-auto mt-20 bg-gray-800 p-10 rounded-[2.5rem] shadow-2xl border border-gray-700">
+        <div class="text-center mb-8">
+            <div class="inline-block p-4 bg-red-600/10 rounded-full mb-4">
+                <i class="fas fa-user-shield text-red-500 text-4xl"></i>
+            </div>
+            <h2 class="text-3xl font-black text-white">Admin Login</h2>
+            <p class="text-gray-500 text-sm mt-2">ম্যানেজ প্যানেলে প্রবেশ করুন</p>
         </div>
-        <p class="text-xs text-center mt-6 text-gray-400 uppercase tracking-widest">Authorized Access Only</p>
+        <div class="space-y-4">
+            <input type="email" id="email" placeholder="Email Address" class="w-full p-4 bg-gray-900 border border-gray-700 rounded-2xl focus:ring-2 focus:ring-red-500 outline-none transition">
+            <input type="password" id="pass" placeholder="Password" class="w-full p-4 bg-gray-900 border border-gray-700 rounded-2xl focus:ring-2 focus:ring-red-500 outline-none transition">
+            <button id="loginBtn" class="w-full bg-red-600 text-white p-4 rounded-2xl font-black text-lg hover:bg-red-700 transition shadow-lg shadow-red-600/20">Login Now</button>
+        </div>
+        <a href="index.html" class="block text-center mt-6 text-gray-500 hover:text-gray-300 text-sm transition">← Back to Site</a>
     </div>
 
     <div id="adminDashboard" class="hidden max-w-6xl mx-auto">
-        <div class="flex justify-between items-center mb-8 bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
-            <div class="flex items-center space-x-3">
-                <i class="fas fa-user-shield text-red-500 text-3xl"></i>
-                <h1 class="text-2xl font-bold">Admin Dashboard</h1>
+        <div class="flex justify-between items-center mb-8 bg-gray-800 p-8 rounded-[2rem] border border-gray-700 shadow-xl">
+            <div class="flex items-center space-x-4">
+                <div class="p-3 bg-red-600 rounded-xl">
+                    <i class="fas fa-database text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-black text-white">Donor Management</h1>
+                    <p id="stats" class="text-red-500 text-xs font-bold uppercase tracking-widest mt-1"></p>
+                </div>
             </div>
-            <button onclick="logout()" class="bg-gray-100 text-gray-600 px-6 py-2 rounded-xl font-bold hover:bg-gray-200 transition">Logout</button>
+            <button onclick="logout()" class="bg-gray-700 text-gray-300 px-6 py-3 rounded-xl font-bold hover:bg-red-600 hover:text-white transition">Logout</button>
         </div>
 
-        <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-            <div class="p-6 border-b bg-gray-50 flex justify-between items-center">
-                <h2 class="text-xl font-bold">Manage Donors</h2>
-                <div id="stats" class="text-sm font-semibold text-gray-500"></div>
-            </div>
+        <div class="bg-gray-800 rounded-[2rem] border border-gray-700 shadow-2xl overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left">
-                    <thead class="bg-gray-50 text-gray-600 text-sm uppercase font-bold">
-                        <tr>
-                            <th class="p-6">Name</th>
-                            <th class="p-6">Group</th>
-                            <th class="p-6">District</th>
-                            <th class="p-6">Phone</th>
-                            <th class="p-6 text-center">Actions</th>
+                    <thead>
+                        <tr class="bg-gray-900/50 text-gray-500 text-xs uppercase font-black tracking-tighter">
+                            <th class="p-8">Donor Name</th>
+                            <th class="p-8 text-center">Group</th>
+                            <th class="p-8">Location</th>
+                            <th class="p-8">Phone</th>
+                            <th class="p-8 text-right">Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="adminList" class="divide-y divide-gray-100">
+                    <tbody id="adminList" class="divide-y divide-gray-700/50">
                         <!-- Rows -->
                     </tbody>
                 </table>
