@@ -1,4 +1,4 @@
-const CACHE_NAME = 'roktobondhu-v2';
+const CACHE_NAME = 'roktosopkhyo-v1';
 const ASSETS = [
   './',
   './index.html',
