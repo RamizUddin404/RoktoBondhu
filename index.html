@@ -92,8 +92,14 @@
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">জেলা</label>
-                        <select id="searchDistrict" class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition">
+                        <select id="searchDistrict" class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition" onchange="updateThanas('search')">
                             <option value="">সব জেলা</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">উপজেলা/থানা</label>
+                        <select id="searchThana" class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition">
+                            <option value="">সব থানা</option>
                         </select>
                     </div>
                 </div>
@@ -116,14 +122,18 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">পূর্ণ নাম</label>
                         <input type="text" id="regName" required class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition">
                     </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">ব্লাড গ্রুপ</label>
+                        <select id="regBlood" required class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition"></select>
+                    </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">ব্লাড গ্রুপ</label>
-                            <select id="regBlood" required class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition"></select>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">জেলা</label>
+                            <select id="regDistrict" required class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition" onchange="updateThanas('reg')"></select>
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">জেলা</label>
-                            <select id="regDistrict" required class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition"></select>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">থানা</label>
+                            <select id="regThana" required class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition"></select>
                         </div>
                     </div>
                     <div>
