@@ -3,25 +3,19 @@ const adminDashboard = document.getElementById('adminDashboard');
 const adminList = document.getElementById('adminList');
 const stats = document.getElementById('stats');
 
-// Auth Listener
-supabaseClient.auth.onAuthStateChange((event, session) => {
-    if (session) {
-        loginSection.classList.add('hidden');
-        adminDashboard.classList.remove('hidden');
-        loadDonors();
-    } else {
-        loginSection.classList.remove('hidden');
-        adminDashboard.classList.add('hidden');
-    }
-});
-
 // Login
-document.getElementById('loginBtn').onclick = async () => {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('pass').value;
-    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-    if (error) alert("Login failed: " + error.message);
-};
+const loginBtn = document.getElementById('loginBtn');
+if (loginBtn) {
+    loginBtn.onclick = async () => {
+        if (!supabaseClient) {
+            initSupabase();
+        }
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('pass').value;
+        const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (error) alert("Login failed: " + error.message);
+    };
+}
 
 // Logout
 async function logout() {
@@ -41,7 +35,7 @@ async function loadDonors() {
     }
 
     adminList.innerHTML = '';
-    stats.innerText = `Total Donors: ${donors ? donors.length : 0}`;
+    if (stats) stats.innerText = `Total Donors: ${donors ? donors.length : 0}`;
     
     if (donors) {
         donors.forEach(d => {
@@ -71,3 +65,22 @@ async function deleteDonor(id) {
         else loadDonors();
     }
 }
+
+// Initialize on load
+window.addEventListener('load', () => {
+    initSupabase();
+    
+    // Auth Listener
+    if (supabaseClient) {
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+            if (session) {
+                if (loginSection) loginSection.classList.add('hidden');
+                if (adminDashboard) adminDashboard.classList.remove('hidden');
+                loadDonors();
+            } else {
+                if (loginSection) loginSection.classList.remove('hidden');
+                if (adminDashboard) adminDashboard.classList.add('hidden');
+            }
+        });
+    }
+});

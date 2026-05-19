@@ -1,8 +1,20 @@
-// Replace with your Supabase project configuration
+// Supabase project configuration
 const SUPABASE_URL = "https://mpyluhqmiiddyllobezk.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1weWx1aHFtaWlkZHlsbG9iZXprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxNTA3MTYsImV4cCI6MjA5NDcyNjcxNn0.R3eMsN1WJxYZidsbETHqGwB-LPjkKNxPf0ci6WbvAXI";
 
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Use a global variable for the client
+let supabaseClient;
+
+// Initialize Supabase when the library is ready
+function initSupabase() {
+    if (typeof supabase !== 'undefined') {
+        supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        console.log("Supabase initialized successfully");
+        return true;
+    }
+    console.error("Supabase library not loaded yet");
+    return false;
+}
 
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -22,5 +34,4 @@ const DISTRICT_DATA = {
     "Feni": ["Feni City", "Chhagalnaiya", "Daganbhuiyan", "Parshuram", "Sonagazi", "Fulgazi"],
     "Rangpur": ["Rangpur City", "Badarganj", "Gangachara", "Kaunia", "Mithapukur", "Pirgachha", "Pirganj", "Taraganj"],
     "Dinajpur": ["Dinajpur City", "Birampur", "Birganj", "Birol", "Bochaganj", "Chirirbandar", "Phulbari", "Ghoraghat", "Hakimpur", "Kaharole", "Khansama", "Nawabganj", "Parbatipur"]
-    // Add more as needed, but this covers major areas for now.
 };
