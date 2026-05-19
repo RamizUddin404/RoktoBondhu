@@ -1,22 +1,22 @@
-# 🩸 RoktoSuhrid (রক্তসুহৃদ) - The Ultimate Blood Network
+# 🩸 RoktoDuti (রক্তদ্যুতি) - The Ultimate Blood Network
 
 <p align="center">
-  <img src="https://img.icons8.com/color/120/blood-bag.png" alt="RoktoSuhrid Logo" />
+  <img src="https://img.icons8.com/color/120/blood-bag.png" alt="RoktoDuti Logo" />
 </p>
 
 <p align="center">
-  <a href="https://ramizuddin404.github.io/RoktoSuhrid/"><img src="https://img.shields.io/badge/Live-Demo-red?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Live Demo" /></a>
+  <a href="https://ramizuddin404.github.io/RoktoDuti/"><img src="https://img.shields.io/badge/Live-Demo-red?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Live Demo" /></a>
   <a href="#"><img src="https://img.shields.io/badge/Identity-Unique-brightgreen?style=for-the-badge" alt="Unique" /></a>
-  <a href="#"><img src="https://img.shields.io/badge/Security-Advanced-blue?style=for-the-badge" alt="Security" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/Status-Optimized-blue?style=for-the-badge" alt="Status" /></a>
 </p>
 
 ---
 
 ## 📝 বর্ণনা (Overview)
 
-**রক্তসুহৃদ** একটি সম্পূর্ণ স্বতন্ত্র এবং আধুনিক প্ল্যাটফর্ম, যা রক্তদাতাদের একটি প্রফেশনাল নেটওয়ার্কের আওতায় নিয়ে আসার জন্য তৈরি। এর ডিজাইন এবং কোড কাঠামো সম্পূর্ণ ইউনিক এবং অন্য কোনো অ্যাপের অনুকরণ নয়।
+**রক্তদ্যুতি** একটি সম্পূর্ণ স্বতন্ত্র এবং আধুনিক প্ল্যাটফর্ম, যা রক্তদাতাদের একটি প্রফেশনাল নেটওয়ার্কের আওতায় নিয়ে আসার জন্য তৈরি। এর ডিজাইন এবং কোড কাঠামো সম্পূর্ণ ইউনিক এবং অন্য কোনো অ্যাপের অনুকরণ নয়।
 
-**RoktoSuhrid** is a distinct and professional platform built to unify blood donors under a modern digital ecosystem. Every aspect of this project is custom-tailored for maximum efficiency and elegance.
+**RoktoDuti** is a distinct and professional platform built to unify blood donors under a modern digital ecosystem. Every aspect of this project is custom-tailored for maximum efficiency and elegance.
 
 ---
 
@@ -40,7 +40,7 @@
 ## 🔒 আইনগত সুরক্ষা (License & Rights)
 
 এই প্রজেক্টের প্রতিটি ফাইল এবং লজিক **Ramiz Uddin** এর মেধাসত্ত্ব। এটি কপি করা বা অনুকরণ করা আইনত দণ্ডনীয়।  
-**Copyright © 2024 RoktoSuhrid (Ramiz Uddin). All Rights Reserved.**
+**Copyright © 2024 RoktoDuti (Ramiz Uddin). All Rights Reserved.**
 
 ---
 
