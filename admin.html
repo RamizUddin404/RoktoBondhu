@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - RoktoBondhu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+
+    <div id="loginSection" class="max-w-md mx-auto mt-20 bg-white p-8 rounded-3xl shadow-xl">
+        <h2 class="text-3xl font-bold mb-6 text-center text-red-500">Admin Login</h2>
+        <div class="space-y-4">
+            <input type="email" id="email" placeholder="Email" class="w-full p-4 bg-gray-50 border rounded-2xl focus:ring-2 focus:ring-red-500 transition">
+            <input type="password" id="pass" placeholder="Password" class="w-full p-4 bg-gray-50 border rounded-2xl focus:ring-2 focus:ring-red-500 transition">
+            <button id="loginBtn" class="w-full bg-red-500 text-white p-4 rounded-2xl font-bold hover:bg-red-600 transition shadow-lg">Login</button>
+        </div>
+        <p class="text-xs text-center mt-6 text-gray-400 uppercase tracking-widest">Authorized Access Only</p>
+    </div>
+
+    <div id="adminDashboard" class="hidden max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-8 bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-user-shield text-red-500 text-3xl"></i>
+                <h1 class="text-2xl font-bold">Admin Dashboard</h1>
+            </div>
+            <button onclick="logout()" class="bg-gray-100 text-gray-600 px-6 py-2 rounded-xl font-bold hover:bg-gray-200 transition">Logout</button>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+            <div class="p-6 border-b bg-gray-50 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Manage Donors</h2>
+                <div id="stats" class="text-sm font-semibold text-gray-500"></div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50 text-gray-600 text-sm uppercase font-bold">
+                        <tr>
+                            <th class="p-6">Name</th>
+                            <th class="p-6">Group</th>
+                            <th class="p-6">District</th>
+                            <th class="p-6">Phone</th>
+                            <th class="p-6 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminList" class="divide-y divide-gray-100">
+                        <!-- Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

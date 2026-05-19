@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoktoBondhu - Blood Donation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ef4444">
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-hand-holding-medical text-red-500 text-2xl"></i>
+                <span class="text-2xl font-bold text-gray-800">RoktoBondhu</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <button onclick="showTab('home')" class="hover:text-red-500 font-medium transition">Home</button>
+                <button onclick="showTab('search')" class="hover:text-red-500 font-medium transition">Search</button>
+                <button onclick="showTab('register')" class="hover:text-red-500 font-medium transition">Join as Donor</button>
+                <a href="admin.html" class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 transition">Admin</a>
+            </div>
+            <button class="md:hidden text-2xl" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden fixed inset-0 bg-white z-40 p-10 flex flex-col space-y-6 text-xl">
+        <button onclick="showTab('home')" class="text-left border-b pb-2">Home</button>
+        <button onclick="showTab('search')" class="text-left border-b pb-2">Search Donor</button>
+        <button onclick="showTab('register')" class="text-left border-b pb-2">Register</button>
+        <a href="admin.html" class="text-left border-b pb-2 text-red-500">Admin Panel</a>
+        <button id="closeMenu" class="absolute top-5 right-5 text-3xl">&times;</button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto p-4 py-8">
+        
+        <!-- Home Tab -->
+        <section id="home" class="tab-content active text-center space-y-12">
+            <div class="space-y-4">
+                <h1 class="text-5xl font-extrabold text-gray-900 leading-tight">রক্ত দিন, জীবন বাঁচান।</h1>
+                <p class="text-xl text-gray-600">আপনার এক ব্যাগ রক্ত বাঁচাতে পারে একটি মুমূর্ষু রোগীর প্রাণ।</p>
+                <div class="flex flex-wrap justify-center gap-4 pt-4">
+                    <button onclick="showTab('search')" class="bg-red-500 text-white px-8 py-3 rounded-full text-lg font-bold shadow-lg hover:bg-red-600 transition transform hover:scale-105">রক্ত খুঁজুন (Search)</button>
+                    <button onclick="showTab('register')" class="bg-white border-2 border-red-500 text-red-500 px-8 py-3 rounded-full text-lg font-bold hover:bg-red-50 transition transform hover:scale-105">ডোনার হোন (Register)</button>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <i class="fas fa-search text-red-500 text-3xl mb-4"></i>
+                    <h3 class="font-bold text-xl mb-2">সহজেই খুঁজুন</h3>
+                    <p class="text-gray-500">আপনার এলাকায় ব্লাড গ্রুপ অনুযায়ী ডোনার খুঁজে বের করুন সেকেন্ডে।</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <i class="fas fa-user-plus text-red-500 text-3xl mb-4"></i>
+                    <h3 class="font-bold text-xl mb-2">ডোনার হন</h3>
+                    <p class="text-gray-500">রেজিস্ট্রেশন করে আমাদের বিশাল নেটওয়ার্কের অংশ হয়ে যান।</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <i class="fas fa-shield-alt text-red-500 text-3xl mb-4"></i>
+                    <h3 class="font-bold text-xl mb-2">সুরক্ষিত তথ্য</h3>
+                    <p class="text-gray-500">আপনার সব তথ্য আমাদের কাছে নিরাপদ এবং সুরক্ষিত।</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Tab -->
+        <section id="search" class="tab-content space-y-8">
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-search-location mr-3 text-red-500"></i> রক্তদাতা খুঁজুন
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">ব্লাড গ্রুপ</label>
+                        <select id="searchBlood" class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition">
+                            <option value="">সব গ্রুপ</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">জেলা</label>
+                        <select id="searchDistrict" class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition">
+                            <option value="">সব জেলা</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="searchBtn" class="w-full mt-8 bg-red-500 text-white p-4 rounded-2xl font-bold text-lg hover:bg-red-600 transition shadow-lg">সার্চ করুন</button>
+            </div>
+
+            <div id="searchResults" class="grid gap-4">
+                <!-- Result Cards injected here -->
+            </div>
+        </section>
+
+        <!-- Register Tab -->
+        <section id="register" class="tab-content">
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 max-w-lg mx-auto">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-user-plus mr-3 text-red-500"></i> নতুন ডোনার রেজিস্ট্রেশন
+                </h2>
+                <form id="regForm" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">পূর্ণ নাম</label>
+                        <input type="text" id="regName" required class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">ব্লাড গ্রুপ</label>
+                            <select id="regBlood" required class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition"></select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">জেলা</label>
+                            <select id="regDistrict" required class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition"></select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">ফোন নম্বর</label>
+                        <input type="tel" id="regPhone" required class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">শেষ রক্তদানের তারিখ (ঐচ্ছিক)</label>
+                        <input type="date" id="regDate" class="w-full p-4 bg-gray-50 border-0 rounded-2xl focus:ring-2 focus:ring-red-500 transition">
+                    </div>
+                    <button type="submit" class="w-full bg-red-500 text-white p-4 rounded-2xl font-bold text-lg hover:bg-red-600 transition shadow-lg">রেজিস্ট্রেশন সম্পন্ন করুন</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 hidden bg-gray-800 text-white px-6 py-3 rounded-full shadow-2xl z-50"></div>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+    </script>
+</body>
+</html>
