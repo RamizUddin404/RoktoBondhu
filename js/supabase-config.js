@@ -2,7 +2,7 @@
 const SUPABASE_URL = "https://mpyluhqmiiddyllobezk.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1weWx1aHFtaWlkZHlsbG9iZXprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxNTA3MTYsImV4cCI6MjA5NDcyNjcxNn0.R3eMsN1WJxYZidsbETHqGwB-LPjkKNxPf0ci6WbvAXI";
 
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 

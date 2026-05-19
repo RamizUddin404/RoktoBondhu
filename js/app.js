@@ -78,7 +78,7 @@ document.getElementById('regForm').onsubmit = async (e) => {
     const lastDate = document.getElementById('regDate').value;
 
     try {
-        const { error } = await supabase
+        const { error } = await supabaseClient
             .from('donors')
             .insert([{ name, blood_group: blood, district, thana, phone, last_donation: lastDate }]);
 
@@ -101,7 +101,7 @@ document.getElementById('searchBtn').onclick = async () => {
     resultsDiv.innerHTML = '<div class="text-center py-10"><i class="fas fa-spinner fa-spin text-3xl text-red-500"></i></div>';
 
     try {
-        let query = supabase.from('donors').select('*');
+        let query = supabaseClient.from('donors').select('*');
         if (blood) query = query.eq('blood_group', blood);
         if (district) query = query.eq('district', district);
         if (thana) query = query.eq('thana', thana);

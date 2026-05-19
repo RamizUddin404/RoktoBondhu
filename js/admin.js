@@ -4,7 +4,7 @@ const adminList = document.getElementById('adminList');
 const stats = document.getElementById('stats');
 
 // Auth Listener
-supabase.auth.onAuthStateChange((event, session) => {
+supabaseClient.auth.onAuthStateChange((event, session) => {
     if (session) {
         loginSection.classList.add('hidden');
         adminDashboard.classList.remove('hidden');
@@ -19,18 +19,18 @@ supabase.auth.onAuthStateChange((event, session) => {
 document.getElementById('loginBtn').onclick = async () => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('pass').value;
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
     if (error) alert("Login failed: " + error.message);
 };
 
 // Logout
 async function logout() {
-    await supabase.auth.signOut();
+    await supabaseClient.auth.signOut();
 }
 
 // Load Data
 async function loadDonors() {
-    const { data: donors, error } = await supabase
+    const { data: donors, error } = await supabaseClient
         .from('donors')
         .select('*')
         .order('created_at', { ascending: false });
@@ -66,7 +66,7 @@ async function loadDonors() {
 // Delete Donor
 async function deleteDonor(id) {
     if (confirm("Are you sure you want to delete this donor?")) {
-        const { error } = await supabase.from('donors').delete().eq('id', id);
+        const { error } = await supabaseClient.from('donors').delete().eq('id', id);
         if (error) alert("Delete failed: " + error.message);
         else loadDonors();
     }
